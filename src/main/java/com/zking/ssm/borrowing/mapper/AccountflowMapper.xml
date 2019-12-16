@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.borrowing.mapper.AccountflowMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.borrowing.model.Accountflow" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="note" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tradeTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="actionType" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="account_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="usableAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="freezedAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, amount, note, tradeTime, actionType, account_id, usableAmount, freezedAmount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from accountflow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from accountflow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.borrowing.model.Accountflow" >
+    insert into accountflow (id, amount, note, 
+      tradeTime, actionType, account_id, 
+      usableAmount, freezedAmount)
+    values (#{id,jdbcType=BIGINT}, #{amount,jdbcType=DECIMAL}, #{note,jdbcType=VARCHAR}, 
+      #{tradetime,jdbcType=TIMESTAMP}, #{actiontype,jdbcType=TINYINT}, #{accountId,jdbcType=BIGINT}, 
+      #{usableamount,jdbcType=DECIMAL}, #{freezedamount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.borrowing.model.Accountflow" >
+    insert into accountflow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="tradetime != null" >
+        tradeTime,
+      </if>
+      <if test="actiontype != null" >
+        actionType,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="usableamount != null" >
+        usableAmount,
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetime != null" >
+        #{tradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actiontype != null" >
+        #{actiontype,jdbcType=TINYINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="usableamount != null" >
+        #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        #{freezedamount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.borrowing.model.Accountflow" >
+    update accountflow
+    <set >
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetime != null" >
+        tradeTime = #{tradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actiontype != null" >
+        actionType = #{actiontype,jdbcType=TINYINT},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="usableamount != null" >
+        usableAmount = #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.borrowing.model.Accountflow" >
+    update accountflow
+    set amount = #{amount,jdbcType=DECIMAL},
+      note = #{note,jdbcType=VARCHAR},
+      tradeTime = #{tradetime,jdbcType=TIMESTAMP},
+      actionType = #{actiontype,jdbcType=TINYINT},
+      account_id = #{accountId,jdbcType=BIGINT},
+      usableAmount = #{usableamount,jdbcType=DECIMAL},
+      freezedAmount = #{freezedamount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

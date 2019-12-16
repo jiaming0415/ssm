@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.check.mapper.EmailverifyMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.check.model.Emailverify" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="userinfo_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="sendTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="uuid" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, email, userinfo_id, sendTime, uuid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from emailverify
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from emailverify
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.check.model.Emailverify" >
+    insert into emailverify (id, email, userinfo_id, 
+      sendTime, uuid)
+    values (#{id,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, #{userinfoId,jdbcType=BIGINT}, 
+      #{sendtime,jdbcType=TIMESTAMP}, #{uuid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.check.model.Emailverify" >
+    insert into emailverify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="userinfoId != null" >
+        userinfo_id,
+      </if>
+      <if test="sendtime != null" >
+        sendTime,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userinfoId != null" >
+        #{userinfoId,jdbcType=BIGINT},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.check.model.Emailverify" >
+    update emailverify
+    <set >
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userinfoId != null" >
+        userinfo_id = #{userinfoId,jdbcType=BIGINT},
+      </if>
+      <if test="sendtime != null" >
+        sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.check.model.Emailverify" >
+    update emailverify
+    set email = #{email,jdbcType=VARCHAR},
+      userinfo_id = #{userinfoId,jdbcType=BIGINT},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      uuid = #{uuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

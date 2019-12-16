@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.system.mapper.UserRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.system.model.UserRole" >
+    <constructor >
+      <arg column="userid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="roleid" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.zking.ssm.system.model.UserRole" >
+    insert into t_user_role (userid, roleid)
+    values (#{userid,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.system.model.UserRole" >
+    insert into t_user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="roleid != null" >
+        roleid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <delete id="deleteByUseridAndRoleid" parameterType="com.zking.ssm.system.model.UserRole">
+        delete from t_user_role where 1=1
+      <if test="userid != null" >
+        AND userid=#{userid,jdbcType=VARCHAR}
+      </if>
+      <if test="roleid != null" >
+        AND roleid=#{roleid,jdbcType=VARCHAR}
+      </if>
+    </delete>
+    <select id="queryListByUseridAndRoleid" resultType="com.zking.ssm.system.model.UserRole"
+            parameterType="com.zking.ssm.system.model.UserRole">
+      SELECT * FROM t_user_role WHERE 1=1
+      <if test="userid != null" >
+      AND userid=#{userid,jdbcType=VARCHAR}
+      </if>
+      <if test="roleid != null" >
+      AND roleid=#{roleid,jdbcType=VARCHAR}
+      </if>
+    </select>
+</mapper>

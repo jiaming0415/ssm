@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.systemaccount.mapper.UserbankinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.systemaccount.model.Userbankinfo" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="bankName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="accountName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="accountNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="forkName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="logininfo_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bankName, accountName, accountNumber, forkName, logininfo_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from userbankinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from userbankinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.systemaccount.model.Userbankinfo" >
+    insert into userbankinfo (id, bankName, accountName, 
+      accountNumber, forkName, logininfo_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{bankname,jdbcType=VARCHAR}, #{accountname,jdbcType=VARCHAR}, 
+      #{accountnumber,jdbcType=VARCHAR}, #{forkname,jdbcType=VARCHAR}, #{logininfoId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.systemaccount.model.Userbankinfo" >
+    insert into userbankinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bankname != null" >
+        bankName,
+      </if>
+      <if test="accountname != null" >
+        accountName,
+      </if>
+      <if test="accountnumber != null" >
+        accountNumber,
+      </if>
+      <if test="forkname != null" >
+        forkName,
+      </if>
+      <if test="logininfoId != null" >
+        logininfo_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bankname != null" >
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountnumber != null" >
+        #{accountnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="forkname != null" >
+        #{forkname,jdbcType=VARCHAR},
+      </if>
+      <if test="logininfoId != null" >
+        #{logininfoId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.systemaccount.model.Userbankinfo" >
+    update userbankinfo
+    <set >
+      <if test="bankname != null" >
+        bankName = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        accountName = #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountnumber != null" >
+        accountNumber = #{accountnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="forkname != null" >
+        forkName = #{forkname,jdbcType=VARCHAR},
+      </if>
+      <if test="logininfoId != null" >
+        logininfo_id = #{logininfoId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.systemaccount.model.Userbankinfo" >
+    update userbankinfo
+    set bankName = #{bankname,jdbcType=VARCHAR},
+      accountName = #{accountname,jdbcType=VARCHAR},
+      accountNumber = #{accountnumber,jdbcType=VARCHAR},
+      forkName = #{forkname,jdbcType=VARCHAR},
+      logininfo_id = #{logininfoId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

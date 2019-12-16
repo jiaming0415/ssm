@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.systemaccount.mapper.SystemaccountflowMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.systemaccount.model.Systemaccountflow" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="systemaccountid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ccountid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tradeTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="actionType" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="usableAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="freezedAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="note" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, systemaccountid, ccountid, tradeTime, actionType, amount, usableAmount, freezedAmount, 
+    note
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from systemaccountflow
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from systemaccountflow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.systemaccount.model.Systemaccountflow" >
+    insert into systemaccountflow (id, systemaccountid, ccountid, 
+      tradeTime, actionType, amount, 
+      usableAmount, freezedAmount, note
+      )
+    values (#{id,jdbcType=INTEGER}, #{systemaccountid,jdbcType=INTEGER}, #{ccountid,jdbcType=INTEGER}, 
+      #{tradetime,jdbcType=TIMESTAMP}, #{actiontype,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, 
+      #{usableamount,jdbcType=DECIMAL}, #{freezedamount,jdbcType=DECIMAL}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.systemaccount.model.Systemaccountflow" >
+    insert into systemaccountflow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="systemaccountid != null" >
+        systemaccountid,
+      </if>
+      <if test="ccountid != null" >
+        ccountid,
+      </if>
+      <if test="tradetime != null" >
+        tradeTime,
+      </if>
+      <if test="actiontype != null" >
+        actionType,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="usableamount != null" >
+        usableAmount,
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="systemaccountid != null" >
+        #{systemaccountid,jdbcType=INTEGER},
+      </if>
+      <if test="ccountid != null" >
+        #{ccountid,jdbcType=INTEGER},
+      </if>
+      <if test="tradetime != null" >
+        #{tradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actiontype != null" >
+        #{actiontype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="usableamount != null" >
+        #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.systemaccount.model.Systemaccountflow" >
+    update systemaccountflow
+    <set >
+      <if test="systemaccountid != null" >
+        systemaccountid = #{systemaccountid,jdbcType=INTEGER},
+      </if>
+      <if test="ccountid != null" >
+        ccountid = #{ccountid,jdbcType=INTEGER},
+      </if>
+      <if test="tradetime != null" >
+        tradeTime = #{tradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actiontype != null" >
+        actionType = #{actiontype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="usableamount != null" >
+        usableAmount = #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.systemaccount.model.Systemaccountflow" >
+    update systemaccountflow
+    set systemaccountid = #{systemaccountid,jdbcType=INTEGER},
+      ccountid = #{ccountid,jdbcType=INTEGER},
+      tradeTime = #{tradetime,jdbcType=TIMESTAMP},
+      actionType = #{actiontype,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      usableAmount = #{usableamount,jdbcType=DECIMAL},
+      freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

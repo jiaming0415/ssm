@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.system.mapper.RoleModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.system.model.RoleModule" >
+    <constructor >
+      <arg column="roleid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="moduleid" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.zking.ssm.system.model.RoleModule" >
+    insert into t_role_module (roleid, moduleid)
+    values (#{roleid,jdbcType=VARCHAR}, #{moduleid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.system.model.RoleModule" >
+    insert into t_role_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        roleid,
+      </if>
+      <if test="moduleid != null" >
+        moduleid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByModuleidAndRoleid" parameterType="com.zking.ssm.system.model.RoleModule">
+    delete from t_role_module where 1=1
+    <if test="moduleid != null" >
+      AND moduleid=#{moduleid,jdbcType=VARCHAR}
+    </if>
+    <if test="roleid != null" >
+      AND roleid=#{roleid,jdbcType=VARCHAR}
+    </if>
+  </delete>
+  <select id="queryListByModuleidAndRoleid" resultType="com.zking.ssm.system.model.RoleModule"
+            parameterType="com.zking.ssm.system.model.RoleModule">
+    SELECT * FROM t_role_module WHERE 1=1
+    <if test="moduleid != null" >
+      AND moduleid=#{moduleid,jdbcType=VARCHAR}
+    </if>
+    <if test="roleid != null" >
+      AND roleid=#{roleid,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

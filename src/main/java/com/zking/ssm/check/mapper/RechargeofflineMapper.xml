@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.check.mapper.RechargeofflineMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.check.model.Rechargeoffline" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column=" auditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="applyTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="auditor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="applier_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tradeCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tradeTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="amount" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="note" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bankinfo_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, state, remark, " auditTime", applyTime, auditor_id, applier_id, tradeCode, tradeTime, 
+    amount, note, bankinfo_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rechargeoffline
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rechargeoffline
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.check.model.Rechargeoffline" >
+    insert into rechargeoffline (id, state, remark, 
+      " auditTime", applyTime, auditor_id, 
+      applier_id, tradeCode, tradeTime, 
+      amount, note, bankinfo_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{audittime,jdbcType=TIMESTAMP}, #{applytime,jdbcType=TIMESTAMP}, #{auditorId,jdbcType=INTEGER}, 
+      #{applierId,jdbcType=INTEGER}, #{tradecode,jdbcType=VARCHAR}, #{tradetime,jdbcType=TIMESTAMP}, 
+      #{amount,jdbcType=REAL}, #{note,jdbcType=VARCHAR}, #{bankinfoId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.check.model.Rechargeoffline" >
+    insert into rechargeoffline
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="audittime != null" >
+        " auditTime",
+      </if>
+      <if test="applytime != null" >
+        applyTime,
+      </if>
+      <if test="auditorId != null" >
+        auditor_id,
+      </if>
+      <if test="applierId != null" >
+        applier_id,
+      </if>
+      <if test="tradecode != null" >
+        tradeCode,
+      </if>
+      <if test="tradetime != null" >
+        tradeTime,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="bankinfoId != null" >
+        bankinfo_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null" >
+        #{auditorId,jdbcType=INTEGER},
+      </if>
+      <if test="applierId != null" >
+        #{applierId,jdbcType=INTEGER},
+      </if>
+      <if test="tradecode != null" >
+        #{tradecode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetime != null" >
+        #{tradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="bankinfoId != null" >
+        #{bankinfoId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.check.model.Rechargeoffline" >
+    update rechargeoffline
+    <set >
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        " auditTime" = #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applytime != null" >
+        applyTime = #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null" >
+        auditor_id = #{auditorId,jdbcType=INTEGER},
+      </if>
+      <if test="applierId != null" >
+        applier_id = #{applierId,jdbcType=INTEGER},
+      </if>
+      <if test="tradecode != null" >
+        tradeCode = #{tradecode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetime != null" >
+        tradeTime = #{tradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=REAL},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="bankinfoId != null" >
+        bankinfo_id = #{bankinfoId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.check.model.Rechargeoffline" >
+    update rechargeoffline
+    set state = #{state,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      " auditTime" = #{audittime,jdbcType=TIMESTAMP},
+      applyTime = #{applytime,jdbcType=TIMESTAMP},
+      auditor_id = #{auditorId,jdbcType=INTEGER},
+      applier_id = #{applierId,jdbcType=INTEGER},
+      tradeCode = #{tradecode,jdbcType=VARCHAR},
+      tradeTime = #{tradetime,jdbcType=TIMESTAMP},
+      amount = #{amount,jdbcType=REAL},
+      note = #{note,jdbcType=VARCHAR},
+      bankinfo_id = #{bankinfoId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

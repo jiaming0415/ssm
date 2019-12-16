@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.book.mapper.BookMapper" >
+
+ <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+    &lt;!&ndash; 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 &ndash;&gt;
+    &lt;!&ndash;<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />&ndash;&gt;
+    &lt;!&ndash;<cache type="org.mybatis.caches.ehcache.EhcacheCache" />&ndash;&gt;
+    &lt;!&ndash;eviction="FIFO"  回收策略为先进先出&ndash;&gt;
+    &lt;!&ndash;flushInterval="60000" 自动刷新时间60s&ndash;&gt;
+    &lt;!&ndash;size="512" 最多缓存512个引用对象&ndash;&gt;
+    &lt;!&ndash;readOnly="true"  只读&ndash;&gt;
+
+    &lt;!&ndash;<property name="timeToIdleSeconds" value="3600"/>
+    <property name="timeToLiveSeconds" value="3600"/>
+    <property name="maxEntriesLocalHeap" value="1000"/>
+    <property name="maxEntriesLocalDisk" value="10000000"/>
+    <property name="memoryStoreEvictionPolicy" value="LRU"/>&ndash;&gt;
+  </cache>-->
+
+
+    <cache type="com.zking.ssm.redis.RedisCache"/>
+  <resultMap id="BaseResultMap" type="com.zking.ssm.book.model.Book" >
+    <constructor>
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="bookname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="booktype" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="createdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, bookname, price, booktype, createdate
+  </sql>
+  <select useCache="true" id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_books
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryBookPager" resultType="com.zking.ssm.book.model.Book"
+          parameterType="com.zking.ssm.book.model.Book">
+    SELECT
+    <include refid="Base_Column_List"/>
+  FROM tb_books WHERE  1=1
+    <if test="null!=bookname and ''!=bookname">
+      AND bookname LIKE concat('%',concat(#{bookname},'%'))
+    </if>
+      ORDER BY id DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_books
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.book.model.Book" >
+    insert into tb_books ( bookname, price,
+      booktype, createdate)
+    values (#{bookname,jdbcType=VARCHAR}, #{price,jdbcType=REAL},
+      #{booktype,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.book.model.Book" >
+    insert into tb_books
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bookname != null" >
+        bookname,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="booktype != null" >
+        booktype,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bookname != null" >
+        #{bookname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="booktype != null" >
+        #{booktype,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.book.model.Book" >
+    update tb_books
+    <set >
+      <if test="bookname != null" >
+        bookname = #{bookname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="booktype != null" >
+        booktype = #{booktype,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.book.model.Book" >
+    update tb_books
+    set bookname = #{bookname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      booktype = #{booktype,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

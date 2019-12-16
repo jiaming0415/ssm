@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.borrowing.mapper.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.borrowing.model.Account" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="logininfoid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tradePassword" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="usableAmount" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="freezedAmount" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="version" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="unReceiveInterest" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="unReceivePrincipal" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="unReturnAmount" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="remainBorrowLimit" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="borrowLimit" jdbcType="REAL" javaType="java.lang.Float" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, logininfoid, tradePassword, usableAmount, freezedAmount, version, unReceiveInterest, 
+    unReceivePrincipal, unReturnAmount, remainBorrowLimit, borrowLimit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from account
+    where logininfoid = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from account
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByLoginfoid" resultType="com.zking.ssm.borrowing.model.Account">
+    select <include refid="Base_Column_List"/> from account where logininfoid = #{logininfoid,jdbcType=INTEGER}
+  </select>
+  <update id="updateByLoginfoid" parameterType="com.zking.ssm.borrowing.model.Account" >
+    update account
+    set usableAmount = #{usableamount,jdbcType=REAL}
+    where logininfoid = #{logininfoid,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insert" parameterType="com.zking.ssm.borrowing.model.Account" >
+    insert into account (id, logininfoid, tradePassword,
+    usableAmount, freezedAmount, version,
+    unReceiveInterest, unReceivePrincipal, unReturnAmount,
+    remainBorrowLimit, borrowLimit)
+    values (#{id,jdbcType=INTEGER}, #{logininfoid,jdbcType=INTEGER}, #{tradepassword,jdbcType=VARCHAR},
+    #{usableamount,jdbcType=REAL}, #{freezedamount,jdbcType=REAL}, #{version,jdbcType=INTEGER},
+    #{unreceiveinterest,jdbcType=REAL}, #{unreceiveprincipal,jdbcType=REAL}, #{unreturnamount,jdbcType=REAL},
+    #{remainborrowlimit,jdbcType=REAL}, #{borrowlimit,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.borrowing.model.Account" >
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logininfoid != null" >
+        logininfoid,
+      </if>
+      <if test="tradepassword != null" >
+        tradePassword,
+      </if>
+      <if test="usableamount != null" >
+        usableAmount,
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="unreceiveinterest != null" >
+        unReceiveInterest,
+      </if>
+      <if test="unreceiveprincipal != null" >
+        unReceivePrincipal,
+      </if>
+      <if test="unreturnamount != null" >
+        unReturnAmount,
+      </if>
+      <if test="remainborrowlimit != null" >
+        remainBorrowLimit,
+      </if>
+      <if test="borrowlimit != null" >
+        borrowLimit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="logininfoid != null" >
+        #{logininfoid,jdbcType=INTEGER},
+      </if>
+      <if test="tradepassword != null" >
+        #{tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usableamount != null" >
+        #{usableamount,jdbcType=REAL},
+      </if>
+      <if test="freezedamount != null" >
+        #{freezedamount,jdbcType=REAL},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="unreceiveinterest != null" >
+        #{unreceiveinterest,jdbcType=REAL},
+      </if>
+      <if test="unreceiveprincipal != null" >
+        #{unreceiveprincipal,jdbcType=REAL},
+      </if>
+      <if test="unreturnamount != null" >
+        #{unreturnamount,jdbcType=REAL},
+      </if>
+      <if test="remainborrowlimit != null" >
+        #{remainborrowlimit,jdbcType=REAL},
+      </if>
+      <if test="borrowlimit != null" >
+        #{borrowlimit,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.borrowing.model.Account" >
+    update account
+    <set >
+      <if test="logininfoid != null" >
+        logininfoid = #{logininfoid,jdbcType=INTEGER},
+      </if>
+      <if test="tradepassword != null" >
+        tradePassword = #{tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usableamount != null" >
+        usableAmount = #{usableamount,jdbcType=REAL},
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount = #{freezedamount,jdbcType=REAL},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="unreceiveinterest != null" >
+        unReceiveInterest = #{unreceiveinterest,jdbcType=REAL},
+      </if>
+      <if test="unreceiveprincipal != null" >
+        unReceivePrincipal = #{unreceiveprincipal,jdbcType=REAL},
+      </if>
+      <if test="unreturnamount != null" >
+        unReturnAmount = #{unreturnamount,jdbcType=REAL},
+      </if>
+      <if test="remainborrowlimit != null" >
+        remainBorrowLimit = #{remainborrowlimit,jdbcType=REAL},
+      </if>
+      <if test="borrowlimit != null" >
+        borrowLimit = #{borrowlimit,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.borrowing.model.Account" >
+    update account
+    set logininfoid = #{logininfoid,jdbcType=INTEGER},
+    tradePassword = #{tradepassword,jdbcType=VARCHAR},
+    usableAmount = #{usableamount,jdbcType=REAL},
+    freezedAmount = #{freezedamount,jdbcType=REAL},
+    version = #{version,jdbcType=INTEGER},
+    unReceiveInterest = #{unreceiveinterest,jdbcType=REAL},
+    unReceivePrincipal = #{unreceiveprincipal,jdbcType=REAL},
+    unReturnAmount = #{unreturnamount,jdbcType=REAL},
+    remainBorrowLimit = #{remainborrowlimit,jdbcType=REAL},
+    borrowLimit = #{borrowlimit,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

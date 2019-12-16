@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.borrowing.mapper.PaymentscheduledetailMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.borrowing.model.Paymentscheduledetail" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bidAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="bid_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="totalAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="principal" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="interest" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="monthIndex" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="deadLine" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="bidrequest_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="payDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="returnType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="paymentSchedule_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="fromLogininfo_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="toLogininfo_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bidAmount, bid_id, totalAmount, principal, interest, monthIndex, deadLine, bidrequest_id, 
+    payDate, returnType, paymentSchedule_id, fromLogininfo_id, toLogininfo_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from paymentscheduledetail
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from paymentscheduledetail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.borrowing.model.Paymentscheduledetail" >
+    insert into paymentscheduledetail (id, bidAmount, bid_id, 
+      totalAmount, principal, interest, 
+      monthIndex, deadLine, bidrequest_id, 
+      payDate, returnType, paymentSchedule_id, 
+      fromLogininfo_id, toLogininfo_id)
+    values (#{id,jdbcType=VARCHAR}, #{bidamount,jdbcType=DECIMAL}, #{bidId,jdbcType=BIGINT}, 
+      #{totalamount,jdbcType=DECIMAL}, #{principal,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, 
+      #{monthindex,jdbcType=INTEGER}, #{deadline,jdbcType=TIMESTAMP}, #{bidrequestId,jdbcType=BIGINT}, 
+      #{paydate,jdbcType=TIMESTAMP}, #{returntype,jdbcType=INTEGER}, #{paymentscheduleId,jdbcType=BIGINT}, 
+      #{fromlogininfoId,jdbcType=BIGINT}, #{tologininfoId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.borrowing.model.Paymentscheduledetail" >
+    insert into paymentscheduledetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bidamount != null" >
+        bidAmount,
+      </if>
+      <if test="bidId != null" >
+        bid_id,
+      </if>
+      <if test="totalamount != null" >
+        totalAmount,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="interest != null" >
+        interest,
+      </if>
+      <if test="monthindex != null" >
+        monthIndex,
+      </if>
+      <if test="deadline != null" >
+        deadLine,
+      </if>
+      <if test="bidrequestId != null" >
+        bidrequest_id,
+      </if>
+      <if test="paydate != null" >
+        payDate,
+      </if>
+      <if test="returntype != null" >
+        returnType,
+      </if>
+      <if test="paymentscheduleId != null" >
+        paymentSchedule_id,
+      </if>
+      <if test="fromlogininfoId != null" >
+        fromLogininfo_id,
+      </if>
+      <if test="tologininfoId != null" >
+        toLogininfo_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bidamount != null" >
+        #{bidamount,jdbcType=DECIMAL},
+      </if>
+      <if test="bidId != null" >
+        #{bidId,jdbcType=BIGINT},
+      </if>
+      <if test="totalamount != null" >
+        #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null" >
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="monthindex != null" >
+        #{monthindex,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bidrequestId != null" >
+        #{bidrequestId,jdbcType=BIGINT},
+      </if>
+      <if test="paydate != null" >
+        #{paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returntype != null" >
+        #{returntype,jdbcType=INTEGER},
+      </if>
+      <if test="paymentscheduleId != null" >
+        #{paymentscheduleId,jdbcType=BIGINT},
+      </if>
+      <if test="fromlogininfoId != null" >
+        #{fromlogininfoId,jdbcType=BIGINT},
+      </if>
+      <if test="tologininfoId != null" >
+        #{tologininfoId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.borrowing.model.Paymentscheduledetail" >
+    update paymentscheduledetail
+    <set >
+      <if test="bidamount != null" >
+        bidAmount = #{bidamount,jdbcType=DECIMAL},
+      </if>
+      <if test="bidId != null" >
+        bid_id = #{bidId,jdbcType=BIGINT},
+      </if>
+      <if test="totalamount != null" >
+        totalAmount = #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null" >
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="monthindex != null" >
+        monthIndex = #{monthindex,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null" >
+        deadLine = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bidrequestId != null" >
+        bidrequest_id = #{bidrequestId,jdbcType=BIGINT},
+      </if>
+      <if test="paydate != null" >
+        payDate = #{paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returntype != null" >
+        returnType = #{returntype,jdbcType=INTEGER},
+      </if>
+      <if test="paymentscheduleId != null" >
+        paymentSchedule_id = #{paymentscheduleId,jdbcType=BIGINT},
+      </if>
+      <if test="fromlogininfoId != null" >
+        fromLogininfo_id = #{fromlogininfoId,jdbcType=BIGINT},
+      </if>
+      <if test="tologininfoId != null" >
+        toLogininfo_id = #{tologininfoId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.borrowing.model.Paymentscheduledetail" >
+    update paymentscheduledetail
+    set bidAmount = #{bidamount,jdbcType=DECIMAL},
+      bid_id = #{bidId,jdbcType=BIGINT},
+      totalAmount = #{totalamount,jdbcType=DECIMAL},
+      principal = #{principal,jdbcType=DECIMAL},
+      interest = #{interest,jdbcType=DECIMAL},
+      monthIndex = #{monthindex,jdbcType=INTEGER},
+      deadLine = #{deadline,jdbcType=TIMESTAMP},
+      bidrequest_id = #{bidrequestId,jdbcType=BIGINT},
+      payDate = #{paydate,jdbcType=TIMESTAMP},
+      returnType = #{returntype,jdbcType=INTEGER},
+      paymentSchedule_id = #{paymentscheduleId,jdbcType=BIGINT},
+      fromLogininfo_id = #{fromlogininfoId,jdbcType=BIGINT},
+      toLogininfo_id = #{tologininfoId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

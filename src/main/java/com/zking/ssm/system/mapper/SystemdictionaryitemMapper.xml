@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.system.mapper.SystemdictionaryitemMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.system.model.Systemdictionaryitem" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="parentId" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tvalue" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sequence" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="intro" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parentId, title, tvalue, sequence, intro
+  </sql>
+  <select id="queryAll" resultType="com.zking.ssm.system.model.Systemdictionaryitem">
+    select
+    <include refid="Base_Column_List" />
+    from systemdictionaryitem
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from systemdictionaryitem
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByParentid" resultType="com.zking.ssm.system.model.Systemdictionaryitem">
+      select
+      <include refid="Base_Column_List" />
+      from systemdictionaryitem
+      where parentid = #{parentid,jdbcType=BIGINT}
+      order by id desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from systemdictionaryitem
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.system.model.Systemdictionaryitem" >
+    insert into systemdictionaryitem (id, parentId, title, 
+      tvalue, sequence, intro
+      )
+    values (#{id,jdbcType=BIGINT}, #{parentid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{tvalue,jdbcType=VARCHAR}, #{sequence,jdbcType=TINYINT}, #{intro,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.system.model.Systemdictionaryitem" >
+    insert into systemdictionaryitem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="tvalue != null" >
+        tvalue,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="parentid != null" >
+        #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tvalue != null" >
+        #{tvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=TINYINT},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.system.model.Systemdictionaryitem" >
+    update systemdictionaryitem
+    <set >
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tvalue != null" >
+        tvalue = #{tvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=TINYINT},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.system.model.Systemdictionaryitem" >
+    update systemdictionaryitem
+    set parentId = #{parentid,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      tvalue = #{tvalue,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=TINYINT},
+      intro = #{intro,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

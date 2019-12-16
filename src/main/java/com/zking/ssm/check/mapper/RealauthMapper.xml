@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.check.mapper.RealauthMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.check.model.Realauth" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="realname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bornDate" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="idNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="image1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="image2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="auditTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="applyTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+      <arg column="auditor_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="applier_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, realname, sex, bornDate, idNumber, address, state, image1, image2, remark, auditTime, 
+    applyTime, auditor_id, applier_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from realauth
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByapplierId" resultType="com.zking.ssm.check.model.Realauth">
+    select
+    <include refid="Base_Column_List" />
+    from realauth
+    where applier_id =#{applierId,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultType="HashMap"
+            parameterType="com.zking.ssm.check.model.Realauth">
+      SELECT a.username ,b.*,c.username as name FROM realauth AS b  LEFT JOIN  t_user AS a ON a.id = b.auditor_id LEFT JOIN userinfo AS c ON c.id = b.applier_id
+
+      where 1 =1
+      <if test="null!=state and ''!=state">
+      AND state = #{state}
+    </if>
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from realauth
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByUserid" parameterType="java.lang.Long" >
+    delete from realauth
+    where applier_id = #{applierId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.check.model.Realauth" >
+    insert into realauth (id, realname, sex, 
+      bornDate, idNumber, address, 
+      state, image1, image2,
+      remark, auditTime,
+      auditor_id, applier_id)
+    values (#{id,jdbcType=BIGINT}, #{realname,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, 
+      #{borndate,jdbcType=VARCHAR}, #{idnumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{state,jdbcType=TINYINT}, #{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR}, #{audittime,jdbcType=TIMESTAMP},
+      #{auditorId,jdbcType=BIGINT}, #{applierId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.check.model.Realauth" >
+    insert into realauth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="borndate != null" >
+        bornDate,
+      </if>
+      <if test="idnumber != null" >
+        idNumber,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="image1 != null" >
+        image1,
+      </if>
+      <if test="image2 != null" >
+        image2,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="audittime != null" >
+        auditTime,
+      </if>
+      <if test="applytime != null" >
+        applyTime,
+      </if>
+      <if test="auditorId != null" >
+        auditor_id,
+      </if>
+      <if test="applierId != null" >
+        applier_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="borndate != null" >
+        #{borndate,jdbcType=VARCHAR},
+      </if>
+      <if test="idnumber != null" >
+        #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="image1 != null" >
+        #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null" >
+        #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null" >
+        #{auditorId,jdbcType=BIGINT},
+      </if>
+      <if test="applierId != null" >
+        #{applierId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.check.model.Realauth" >
+    update realauth
+    <set >
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="borndate != null" >
+        bornDate = #{borndate,jdbcType=VARCHAR},
+      </if>
+      <if test="idnumber != null" >
+        idNumber = #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="image1 != null" >
+        image1 = #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null" >
+        image2 = #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        auditTime = #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applytime != null" >
+        applyTime = #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null" >
+        auditor_id = #{auditorId,jdbcType=BIGINT},
+      </if>
+      <if test="applierId != null" >
+        applier_id = #{applierId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.check.model.Realauth" >
+    update realauth
+    set realname = #{realname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      bornDate = #{borndate,jdbcType=VARCHAR},
+      idNumber = #{idnumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      image1 = #{image1,jdbcType=VARCHAR},
+      image2 = #{image2,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      auditTime = #{audittime,jdbcType=TIMESTAMP},
+      applyTime = #{applytime,jdbcType=TIMESTAMP},
+      auditor_id = #{auditorId,jdbcType=BIGINT},
+      applier_id = #{applierId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
